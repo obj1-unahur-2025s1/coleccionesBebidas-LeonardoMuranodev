@@ -1,6 +1,6 @@
 import tito.*
 
-describe "test de tito" {
+describe "test de tito parte 1" {
 
     method initialize() {
         tito.consumir(5,wisky)
@@ -28,5 +28,15 @@ describe "test de tito" {
         tito.consumir(5, cianuro)
         assert.equals(0,tito.velocidad())
     }
+}
 
+describe "test de tito parte 2" {
+    test " coctel suave con tres bebidas" {
+        coctelSuave.agregar(cianuro)
+        coctelSuave.agregar(wisky)
+        coctelSuave.agregar(terere)
+        tito.consumir(10, coctelSuave)
+        assert.equals(10, coctelSuave.rendimiento(10))
+        assert.equals(70, tito.velocidad())
+    }
 }
