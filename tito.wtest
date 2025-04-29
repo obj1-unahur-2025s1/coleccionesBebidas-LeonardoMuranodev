@@ -31,7 +31,7 @@ describe "test de tito parte 1" {
 }
 
 describe "test de tito parte 2" {
-    test " coctel suave con tres bebidas" {
+    test "coctel suave con tres bebidas" {
         coctelSuave.agregar(cianuro)
         coctelSuave.agregar(wisky)
         coctelSuave.agregar(terere)
@@ -39,4 +39,39 @@ describe "test de tito parte 2" {
         assert.equals(10, coctelSuave.rendimiento(10))
         assert.equals(70, tito.velocidad())
     }
+
+    test "licuado de frutas, agregamos leche y naranja "{
+        licuadoFrutas.agregar(leche)
+        licuadoFrutas.agregar(naranja)
+        assert.equals(90, licuadoFrutas.rendimiento(1500))
+    }
+
+    test "coctel: agregamos licuado de frutas, terere  cianuro, por eso debe ser 0"{
+        coctel.agregar(licuadoFrutas)
+        coctel.agregar(terere)
+        coctel.agregar(cianuro)
+        assert.equals(0, coctel.rendimiento(2000))
+    }
+
+    test "coctel: agregamos licuado de frutas"{
+        licuadoFrutas.agregar(leche)
+        licuadoFrutas.agregar(banana) //50 
+        coctel.agregar(licuadoFrutas)
+        coctel.agregar(terere)
+        assert.equals(50 * 100, coctel.rendimiento(2000))
+    }
+
+    test "agua saborizada: con wisky de 50 de cantidad, debe ser 50 * 0.9 *0.9) / 4 + 1"{
+        aguaSaborizada.cambiarBebida(wisky)
+        aguaSaborizada.rendimiento(50)
+        assert.equals((50 * 0.9 *0.9) / 4 + 1, coctel.rendimiento(2000))
+    }
+
+    test "coctel con agua saborizada con coctel, debe ser"{
+        coctel.agregar(aguaSaborizada)
+        aguaSaborizada.cambiarBebida(coctel)
+        coctel.rendimiento(100)
+        assert.equals(1, coctel.rendimiento(2000))
+    }
 }
+
