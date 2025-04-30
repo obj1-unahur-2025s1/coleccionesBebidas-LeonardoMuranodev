@@ -38,7 +38,7 @@ object licuadoFrutas {
     const ingredientes = []
 
     method rendimiento(cantidad) {
-        return ingredientes.map({e => e.nutrientes()}).sum() * (cantidad / 100)
+        return ingredientes.map({e => e.nutrientes()}).sum() * (cantidad / 1000)
     }
 
     method agregar(bebidaOIngredientes) {
@@ -56,10 +56,16 @@ object aguaSaborizada {
     method cambiarBebida(unaBebida) {
         otraBebida = unaBebida
     }
+
+    method otraBebida(){
+        return 5 + 10
+    }
 }
 
 object coctel {
     const bebidas = []
+
+    method bebidas() = bebidas
 
     method rendimiento(cantidad) {
         return bebidas.fold(1, { acumulador, bebida =>
@@ -76,7 +82,7 @@ object coctelSuave {
     const bebidas = []
 
     method rendimiento(cantidad) {
-        return bebidas.filter({e => e.rendimiento(cantidad) > 0.5}).sum()
+        return bebidas.filter({e => e.rendimiento(cantidad) > 0.5}).sum({e => e.rendimiento(cantidad)})
     }
 
     method agregar(bebidaOIngredientes) {

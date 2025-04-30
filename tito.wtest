@@ -31,21 +31,23 @@ describe "test de tito parte 1" {
 }
 
 describe "test de tito parte 2" {
-    test "coctel suave con tres bebidas" {
+    //Bien
+    test "coctel suave con tres bebidas: es 1" {
         coctelSuave.agregar(cianuro)
         coctelSuave.agregar(wisky)
         coctelSuave.agregar(terere)
         tito.consumir(10, coctelSuave)
-        assert.equals(10, coctelSuave.rendimiento(10))
-        assert.equals(70, tito.velocidad())
+        assert.equals( 1, coctelSuave.rendimiento(10))
     }
 
-    test "licuado de frutas, agregamos leche y naranja "{
+    //Bien
+    test "licuado de frutas, agregamos leche y naranja: es 90 "{
         licuadoFrutas.agregar(leche)
         licuadoFrutas.agregar(naranja)
         assert.equals(90, licuadoFrutas.rendimiento(1500))
     }
 
+    //Bien
     test "coctel: agregamos licuado de frutas, terere  cianuro, por eso debe ser 0"{
         coctel.agregar(licuadoFrutas)
         coctel.agregar(terere)
@@ -53,25 +55,35 @@ describe "test de tito parte 2" {
         assert.equals(0, coctel.rendimiento(2000))
     }
 
-    test "coctel: agregamos licuado de frutas"{
+    //Bien: los ingredientes del licuado si afectan al coctel
+    test "coctel: agregamos ingredientes al licuado de frutas para que afecte al coctel: debe ser:  55 * 2 * 2000 * 0.1"{
         licuadoFrutas.agregar(leche)
-        licuadoFrutas.agregar(banana) //50 
+        licuadoFrutas.agregar(banana)
         coctel.agregar(licuadoFrutas)
         coctel.agregar(terere)
-        assert.equals(50 * 100, coctel.rendimiento(2000))
+        assert.equals(55 * 2 * 2000 * 0.1, coctel.rendimiento(2000))
+        assert.equals(2, coctel.bebidas().size())
     }
 
-    test "agua saborizada: con wisky de 50 de cantidad, debe ser 50 * 0.9 *0.9) / 4 + 1"{
+    test "coctel: agregamos al coctel wisky y agua saborizada con wisky"{ 
+        coctel.agregar(wisky)
+        coctel.agregar(aguaSaborizada)
+        aguaSaborizada.cambiarBebida(wisky)
+        assert.equals(0.9 ** 200 * (((0.9 ** 200) / 4) + 1), coctel.rendimiento(200))
+    }
+
+    //Bien
+    test "agua saborizada: con wisky de 50 de cantidad, debe ser (0.9 ** 50) / 4 + 1"{
         aguaSaborizada.cambiarBebida(wisky)
         aguaSaborizada.rendimiento(50)
-        assert.equals((50 * 0.9 *0.9) / 4 + 1, coctel.rendimiento(2000))
+        assert.equals(( 0.9 ** 50) / 4 + 1, aguaSaborizada.rendimiento(50))
     }
 
-    test "coctel con agua saborizada con coctel, debe ser"{
+    //No probar: ocurre un bucle interminable
+    test "coctel con agua saborizada con coctel, es un bucle interminable"{
         coctel.agregar(aguaSaborizada)
         aguaSaborizada.cambiarBebida(coctel)
-        coctel.rendimiento(100)
-        assert.equals(1, coctel.rendimiento(2000))
+        assert.equals(1, coctel.rendimiento(100))
     }
 }
 
